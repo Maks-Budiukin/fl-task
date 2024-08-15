@@ -21,30 +21,49 @@
       </div>
 
       <div class="mt-12">
-        <UiButton variant="accept" @click="showModal = true">Click me!</UiButton>
+        <UiButton variant="accept" @click="onShowModal">Click me!</UiButton>
       </div>
 
       <!-- MODAL TASK -->
 
       <div class="mt-12">
-        <GlobalModal :show="showModal" @close="showModal = false" :hideOnBackdropClick=true :closeButton="true">
+        <GlobalModal :show="showModal" @close="onHide" :hideOnBackdropClick=true :closeButton="true">
           <template #header>
-            <h4>Hi! This is our test modal!</h4>
+            <h4>WARNING!</h4>
           </template>
 
           <template #default>
-            <h4>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, nemo at, reiciendis, deserunt inventore
-              facilis repellat fugit vitae consequatur ipsa illum asperiores? Aspernatur quibusdam exercitationem beatae
-              esse natus omnis nam.</h4>
+
+            <p class="text-2xl text-center">Your keyboard will explode in <span class="text-5xl font-bold mx-5"> {{
+              seconds
+                }}
+              </span> seconds! </p>
+
+            <Transition name="fade">
+              <div v-show="showNoWay" class="mt-6">
+                <p v-if="seconds > 0"></p>
+                <p class="text-2xl text-center">
+                  Life is never that easy!
+                </p>
+              </div>
+            </Transition>
+
+            <Transition name="fade">
+              <div v-show="seconds === 0" class="w-full py-12 mt-6 bg-[url('/public/pngegg.png')] bg-cover bg-center">
+                <p class="text-7xl text-center">
+                  Boom!
+                </p>
+              </div>
+            </Transition>
           </template>
 
           <template #footer>
             <div class="flex justify-end items-center gap-2">
               <div>
-                <UiButton variant="accept" @click="showModal = false">Accept!</UiButton>
+                <UiButton variant="accept" @click="showNoWay = true">Don't explode</UiButton>
               </div>
               <div>
-                <UiButton variant="cancel" @click="showModal = false">Cancel</UiButton>
+                <UiButton variant="cancel" @click="onHide">Cancel</UiButton>
               </div>
             </div>
           </template>
@@ -64,4 +83,46 @@ import GlobalModal from '../components/GlobalModal.vue'
 
 const showModal = ref(false);
 
+const seconds = ref(9);
+const isRunning = ref(false);
+
+const startTimer = () => {
+  if (isRunning.value) return;
+
+  seconds.value = 9;
+  isRunning.value = true;
+  let timerInterval = setInterval(() => {
+    if (seconds.value > 0) {
+      seconds.value -= 1;
+    } else {
+      clearInterval(timerInterval);
+      isRunning.value = false;
+    }
+  }, 1000);
+};
+
+const onShowModal = () => {
+  showModal.value = true
+  startTimer()
+}
+
+const showNoWay = ref(false);
+
+const onHide = () => {
+  showNoWay.value = false;
+  showModal.value = false;
+}
+
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
