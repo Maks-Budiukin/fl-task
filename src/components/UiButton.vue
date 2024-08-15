@@ -1,5 +1,5 @@
 <template>
-    <button class="max-w-full sm:max-w-[200px] px-8 py-4 rounded font-bold duration-300"
+    <button class="max-w-full sm:max-w-[200px] px-8 py-4 rounded font-bold duration-200"
         :class="{ 'hover:bg-[#69e073d2] hover:border-[#69e073d2] hover:text-white': variant === 'accept', 'hover:bg-[#e06969d2] hover:border-[#e06969d2] hover:text-white': variant === 'cancel' }">
         <slot />
     </button>

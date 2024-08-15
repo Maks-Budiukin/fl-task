@@ -8,12 +8,12 @@
 
         <transition :name="'fade'">
             <div v-if="show"
-                class="fixed z-[10] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full sm:w-[50vw] max-h-screen rounded bg-white p-4"
+                class="fixed z-[10] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full sm:w-[50vw] max-h-screen rounded bg-[var(--bg-color)] border border-[var(--border-color)] p-4"
                 role="dialog">
 
 
                 <div class="max-h-screen">
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-between border-b border-[var(--border-color)] pb-4">
                         <div class="text-xl font-bold">
                             <slot name="header" />
                         </div>

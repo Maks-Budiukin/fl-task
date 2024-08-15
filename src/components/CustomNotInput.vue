@@ -1,12 +1,10 @@
 <template>
     <div>
         <div>
-            <p tabindex="0" class="p-4 focus:border-3 rounded">
+            <p tabindex="0" class="p-4 focus:border-3 rounded outline-[var(--border-color)]">
                 I am not even an input.
                 Though, I am focused on page load.
             </p>
-
-            <input type="text">
         </div>
     </div>
 </template>

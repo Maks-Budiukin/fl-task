@@ -71,6 +71,13 @@
         </GlobalModal>
       </div>
     </div>
+
+    <!-- PLUGIN TASK -->
+
+    <div class="flex justify-center items-center">
+      <ThemeSwitcher />
+    </div>
+
   </main>
 </template>
 
@@ -80,6 +87,7 @@ import CustomInput from '../components/CustomInput.vue'
 import CustomNotInput from '../components/CustomNotInput.vue'
 import UiButton from '../components/UiButton.vue'
 import GlobalModal from '../components/GlobalModal.vue'
+import ThemeSwitcher from '../components/ThemeSwitcher.vue'
 
 const showModal = ref(false);
 
